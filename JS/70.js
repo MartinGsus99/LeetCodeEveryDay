@@ -9,13 +9,50 @@
  */
 
 
-//思路：每次的选择是1或者2；判定是否达到n阶；相当于到达前两节的方法+1或+2
+// //思路：每次的选择是1或者2；判定是否达到n阶；相当于到达前两节的方法+1或+2
+// var climbStairs = function(n) {
+//     const dp=new Array(n+1)                 //用来存放到该层的方法有多少种；
+//     dp[1]=1;
+//     dp[2]=2;
+
+//     for(i=3;i<n;i++)
+//     {
+//         dp[i]=dp[i-1]+dp[i-2];
+//     }
+
+//     return dp[n];
+// };
+
+// //空间复杂度优化
+// var climbStairs = function(n) {
+   
+//     pre=1;
+//     next=2;
+//     now=0;                //用来存放到该层的方法有多少种；
+
+//     for(i=3;i<n;i++)
+//     {
+//        now=pre+next;
+//        pre=next;
+//        next=now;
+//     }
+
+//     return now;
+// };
+
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
 var climbStairs = function(n) {
-    const dp=new Array(n+1)                 //用来存放到该层的方法有多少种；
+    //使用备忘录
+    var dp=[];
+    dp[0]=0;
     dp[1]=1;
     dp[2]=2;
 
-    for(i=3;i<n;i++)
+    for(let i=3;i<n;i++)
     {
         dp[i]=dp[i-1]+dp[i-2];
     }
@@ -23,19 +60,23 @@ var climbStairs = function(n) {
     return dp[n];
 };
 
-//空间复杂度优化
+//优化存储空间，只需要记录前两个数
+/**
+ * @param {number} n
+ * @return {number}
+ */
 var climbStairs = function(n) {
-   
-    pre=1;
-    next=2;
-    now=0;                //用来存放到该层的方法有多少种；
-
-    for(i=3;i<n;i++)
+    //使用备忘录
+    var a=1;
+    var b=2;
+    var temp=0;
+    for(let i=3;i<n+1;i++)
     {
-       now=pre+next;
-       pre=next;
-       next=now;
+        temp=a+b;
+        a=b;
+        b=temp;
     }
 
-    return now;
+    return temp;
 };
+
