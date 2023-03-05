@@ -1,6 +1,4 @@
 var findTarget=function(deadends,target){
-
-
     var plus=function(password,pos){
         password=password.split('');
         if(password[pos]=='9'){
@@ -37,6 +35,7 @@ var findTarget=function(deadends,target){
 
             for(let i=0;i<size;i++){
                 let cur=queue.shift();
+                
                 if(visited.has(cur)){
                     continue;
                 }
