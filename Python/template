@@ -1,0 +1,4 @@
+{{title.DATA}} 
+当前时间：{{time.DATA}} 
+今日天气：{{weather.DATA}}
+From 小年轻的每日问候❤
