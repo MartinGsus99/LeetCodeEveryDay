@@ -4,9 +4,10 @@
  */
 //广度优先算法，从左上角开始，使用hash表记录访问过的土地；
 //只有上下可以加入土地，每次到一个方块将他的上下左右都加入到待访问队列；
+//5.56 5.02
 var numIslands = function (grid) {
 
-    var visited = new Set();            //存放已经访问的点
+    var visited = new Set();            //存放已经访问的点，注意：考虑到性能问题，直接使用二维数组来标记更快；
     var queue = new Array();            //存放当前结点相邻的结点
     //推入0，0
 
@@ -68,7 +69,7 @@ var numIslands = function (grid) {
         console.log("Count:", count);
     }
 
-    //起始点检索条件：1.必须为1 2.起始点没有被访问过
+    //起始点检索条件：1.必须为1 2.起始点没有被访问过,可以优化；
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
             if (!visited.has([i, j].toString()) && grid[i][j] == '1') {
