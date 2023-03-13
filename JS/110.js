@@ -15,6 +15,25 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
- var isBalanced = function(root) {
-    
+//48.08 73.47
+var isBalanced = function(root) {
+    var flag=true;
+    var traverse=function(node){
+        if(node==null){
+            return 0;
+        }
+        let leftH=1+traverse(node.left);
+        let rightH=1+traverse(node.right);
+        if(Math.abs(leftH-rightH)>1){
+            flag=false;
+            return;
+        }else{
+            return Math.max(leftH,rightH);
+        }
+        
+    }
+
+    traverse(root);
+
+    return flag;
 };
