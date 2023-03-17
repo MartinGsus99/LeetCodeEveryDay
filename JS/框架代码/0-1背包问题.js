@@ -44,7 +44,7 @@ var getMostValuableThings=function(n,w,wt,val)
             }                           
         }
     }
-
+    console.log(dp)
     return dp[n][w];
 }
 wt=[2,1,3];
