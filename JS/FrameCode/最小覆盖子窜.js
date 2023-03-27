@@ -74,7 +74,7 @@ var minWindow = function(s, t) {
     var left=0;
     var right=0;
     var valid=need.size;
-      console.log(need)
+    console.log(need)
     let res = '';
     while(right<s.length){
         let c=s[right];
