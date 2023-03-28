@@ -8,27 +8,39 @@
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function (s) {
-    let strings = s.split('');
-    supportFunction(0, 1, strings,0);
-};
 
-var supportFunction = function (p1, p2, strings,max_length) {
-    let map = new Map();
-    var temp_max_length = p2-p1;
+//滑动窗口，使用一个window记录当前window，滑动的同时记录最长值，如果超过临时最长值更新最长值，返回；
+var lengthOfLongestSubstring = function(s) {
+    var widnow=new Map();
 
-    for (var i = p1+1,j=p2+1; p2 < strings.length; p2++) {
-        if (!map.has(strings[j])) {
-            map.set(strings[j], strings[j]);
+    var left=0;
+    var right=0;
+    var maxLength=0;
+
+    var checkMap=function(){
+
+    }
+
+    while(right<s.length){
+        let c=s[right];
+
+        if(!widnow.has(c)){
+            widnow.set(c,1);
         }
-        else {
-            temp_max_length = Math.max(j-i, temp_max_length);
-            return temp_max_length;
+
+        while(checkMap(window)){
+            let d=s[left];
+
+            if(widnow.get(d)-1!=0){
+                maxLength-=1;
+            }
+            left++;
         }
     }
-    return strings.length-i
-}
+    return maxLength;
+};
 
-s = "s"
-console.log(lengthOfLongestSubstring(s));
+var s="abcabcbb";
+var s1="bbbbb";
 
+console.log(lengthOfLongestSubstring(s))
