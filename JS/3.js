@@ -10,32 +10,26 @@
  */
 
 //滑动窗口，使用一个window记录当前window，滑动的同时记录最长值，如果超过临时最长值更新最长值，返回；
+//34.33 98.88
 var lengthOfLongestSubstring = function(s) {
-    var widnow=new Map();
+    var window=new Map();
 
     var left=0;
     var right=0;
     var maxLength=0;
 
-    var checkMap=function(){
-
-    }
-
     while(right<s.length){
         let c=s[right];
 
-        if(!widnow.has(c)){
-            widnow.set(c,1);
-        }
+        window.set(c,window.has(c)?window.get(c)+1:1);
 
-        while(checkMap(window)){
+        while(window.get(c)>1){
             let d=s[left];
-
-            if(widnow.get(d)-1!=0){
-                maxLength-=1;
-            }
+            window.set(d,window.get(d)-1);
             left++;
         }
+        maxLength=Math.max(maxLength,right+1-left);
+        right++;
     }
     return maxLength;
 };
@@ -43,4 +37,4 @@ var lengthOfLongestSubstring = function(s) {
 var s="abcabcbb";
 var s1="bbbbb";
 
-console.log(lengthOfLongestSubstring(s))
+console.log(lengthOfLongestSubstring(s1))
