@@ -34,4 +34,33 @@ var canPartition = function (nums) {
     return dp[n][sum];
 }
 
-console.log(canPartition([1, 5, 11, 5]))
+//降低空间复杂度,92.59 99.56
+var canPartitionLowSpace=function(nums){
+    var sum=0;
+    var n=nums.length;
+
+    for (let i = 0; i < n; i++) {
+        sum += nums[i];
+    }
+
+    if(sum%2!=0){
+        return false;
+    }
+
+    sum=sum/2;
+
+    var dp=new Array(sum+1).fill(false);
+    dp[0]=true;
+
+    for(let i=0;i<n;i++){
+        for(let j=sum;j>=0;j--){
+            if(j-nums[i]>=0){
+                dp[j]=dp[j] || dp[j-nums[i]];
+            }
+        }
+    }
+    console.log(dp)
+    return dp[sum];
+}
+
+console.log(canPartitionLowSpace([2,13,1]))
