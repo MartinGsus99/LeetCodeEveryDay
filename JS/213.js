@@ -58,7 +58,7 @@ var rob = function (nums) {
     return c
   }
 
-  //取出两种情况的最大值，取第一个或者取最后一个（其实还有两头都不取这个情况）
+  //取出两种情况的最大值，取第一个或者取最后一个（其实还有两头都不取这个情况） 
   return Math.max(robRange(nums, 0, n - 2), robRange(nums, 1, n - 1))
 }
 
