@@ -10,33 +10,27 @@
  * @param {number} n
  * @return {TreeNode[]}
  */
-
-//创建一个数组，存放从1-n的所有结点，再加上一个null结点；
-//每次生成取一个结点
-var generateTrees = function(n) {
-    
-    //初始化使用列表，已经使用则对应位设置为1；
-    var used=[];
-    for(let i=0;i<n;i++){
-        used.push(0);
+var generateTrees = function (n) {
+    if (n == 0) {
+        return null
     }
-    //生成树
-    var createTree=function(used,root){
-        
+    let root = new TreeNode(1, null, null)
+    for (let i = 2; i <= n; i++) {
+        insertNumberToBST(root, i)
+    }
+    return root
+}
+
+var insertNumberToBST = function (root, num) {
+    if (root == null) {
+        let newNode = new TreeNode(num)
+        return newNode
     }
 
-
-    //判定是否为二叉搜索树
-    var checkSearchTree=function(root){
-        if(!root){
-            return;
-        }
-
-        if(root.left.val>root.right.val || root.left.val >root.val ||root.val>root.right.val){
-            return false;
-        }
-
-        checkSearchTree(root.left);
-        checkSearchTree(root.right);
+    if (root.val > num) {
+        insertNumberToBST(root.left, num)
     }
-};
+    if (root.right < num) {
+        insertNumberToBST(root.right, num)
+    }
+}
