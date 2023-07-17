@@ -16,11 +16,7 @@ var subsets = function (nums) {
       path.pop()
     }
   }
-
   backtrack(nums, 0, path)
-
-
   return res
 }
-
 console.log(subsets([1, 2, 3]))
