@@ -11,30 +11,54 @@
 
 //滑动窗口，使用一个window记录当前window，滑动的同时记录最长值，如果超过临时最长值更新最长值，返回；
 //34.33 98.88
-var lengthOfLongestSubstring = function(s) {
-    var window=new Map();
+// var lengthOfLongestSubstring = function(s) {
+//     var window=new Map();
 
-    var left=0;
-    var right=0;
-    var maxLength=0;
+//     var left=0;
+//     var right=0;
+//     var maxLength=0;
 
-    while(right<s.length){
-        let c=s[right];
+//     while(right<s.length){
+//         let c=s[right];
 
-        window.set(c,window.has(c)?window.get(c)+1:1);
+//         window.set(c,window.has(c)?window.get(c)+1:1);
 
-        while(window.get(c)>1){
-            let d=s[left];
-            window.set(d,window.get(d)-1);
-            left++;
+//         while(window.get(c)>1){
+//             let d=s[left];
+//             window.set(d,window.get(d)-1);
+//             left++;
+//         }
+//         maxLength=Math.max(maxLength,right+1-left);
+//         right++;
+//     }
+//     return maxLength;
+// };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+    let window = {}
+    let length = s.length
+    let right = 0, left = 0
+    let res = 0
+    while (right < length) {
+        let c = s[right]
+        window[c] = (window[c] || 0) + 1
+        right++
+        while (window[c] > 1) {
+            let c = s[left]
+            window[c]--
+            left++
         }
-        maxLength=Math.max(maxLength,right+1-left);
-        right++;
+        res = Math.max(res, right - left)
     }
-    return maxLength;
-};
+    return res
+}
 
-var s="abcabcbb";
-var s1="bbbbb";
 
-console.log(lengthOfLongestSubstring(s1))
+var s = "abcabcbb"
+var s1 = "bbbbb"
+
+console.log(lengthOfLongestSubstring(s))
