@@ -122,3 +122,13 @@ let p = "abc"
 console.log(findAnagrams(s, p))
 
 
+//总结框架
+while (right < leng) {
+  window.add(s[right])
+  right++
+
+  while (valid) {
+    window.remove(s[left])
+    left++
+  }
+}
