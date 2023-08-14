@@ -1,5 +1,32 @@
-// 5. 最长回文子串
-// 给你一个字符串 s，找到 s 中最长的回文子串。
-// 输入：s = "babad"
-// 输出："bab"
-// 解释："aba" 同样是符合题意的答案。
+/**
+ * @param {string} s
+ * @return {string}
+ */
+//暴力遍历
+var longestPalindrome = function (s) {
+  const n = s.length
+  let substirng = ""
+  if (n < 2) {
+    return s
+  }
+
+  const find = function (left, right) {
+    while (left >= 0 && right < n && s[left] === s[right]) {
+      left--
+      right++
+    }
+
+    if (right - left - 1 > substirng.length) {
+      substirng = s.slice(left + 1, right)
+    }
+  }
+
+  for (let i = 0; i < n; i++) {
+    find(i, i)
+    find(i, i + 1)
+  }
+
+  return substirng
+
+
+}
