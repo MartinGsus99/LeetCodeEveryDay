@@ -30,19 +30,20 @@ var buildGraph = function (nodeNums, edges) {
   return graph
 }
 
+
 /**
  * @param {number} numCourses
  * @param {number[][]} prerequisites
- * @return {number[]}
+ * @return {boolean}
  */
-//18.43 63.92
-var findOrder = function (numCourses, prerequisites) {
+//19.86 52.35
+//解题思路：先将课程表转换有向图，然后判断图中是否存在环
+//环的判定由DFS遍历得到，使用onPath表示当前遍历的路径，如果新的节点在onPath中就存在环
+var canFinish = function (numCourses, prerequisites) {
   let graph = buildGraph(numCourses, prerequisites)
   var visited = new Array(graph.vertexes.length).fill(0)
   var onPath = []
   var hasCycle = false
-  var postOrder = []
-
   const graphTraverse = function (s, graph) {
     if (onPath[s]) {
       hasCycle = true
@@ -58,21 +59,14 @@ var findOrder = function (numCourses, prerequisites) {
     }
 
     //后序代码
-    postOrder.push(s)
     onPath[s] = false
   }
   for (let i = 0; i < numCourses; i++) {
     graphTraverse(i, graph)
   }
-
-  if (hasCycle) {
-    return []
-  }
-  return postOrder.reverse()
+  return !hasCycle
 }
 
-let numCourses = 4, prerequisites = [[1, 0], [2, 0], [3, 1], [3, 2]]
-let numCourses1 = 2, prerequisites1 = [[1, 0]]
-let numCourses2 = 1, prerequisites2 = []
-let numCourses3 = 2, prerequisites3 = []
-console.log("结果", findOrder(numCourses3, prerequisites3))
+let numCourses = 2, prerequisites = [[1, 0], [0, 1]]
+let numCourses1 = 20, prerequisites1 = [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]
+console.log(canFinish(numCourses1, prerequisites1))
