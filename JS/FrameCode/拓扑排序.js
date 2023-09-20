@@ -56,7 +56,7 @@ var buildGraph = function (nodeNums, edges) {
 }
 
 //DFS遍历图:判断是否有环
-var traverse = function (graph) {
+var DFSTraverse = function (graph) {
   var visited = new Array(graph.vertexes.length).fill(0)
   var onPath = []
   var hasCycle = false
@@ -84,6 +84,10 @@ var traverse = function (graph) {
 }
 
 //BFS遍历图，判断是否有环
+var BFSTraverse = function () {
+
+}
+
 
 let edges1 = [[1, 2], [2, 3], [3, 4]]
 console.log(buildGraph(5, edges1))

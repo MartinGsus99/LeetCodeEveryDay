@@ -54,3 +54,37 @@ var rob = function (root) {
   let res = dp(root)
   return Math.max(res[0], res[1])
 }
+
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var rob = function (root) {
+  if (!root) {
+    return [0, 0]
+  }
+
+  const dp = function (root) {
+    if (!root) {
+      return [0, 0]
+    }
+    let left = rob(root.left)
+    let right = rob(root.right)
+    let robIt = root.val + left[0] + right[0]
+    let notRob = Math.max(left[1], right[1])
+    return [robIt, notRob]
+  }
+
+  let res = dp[root]
+  return Math.max(res)
+
+}
