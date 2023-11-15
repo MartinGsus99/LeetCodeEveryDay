@@ -9,16 +9,8 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var swapPairs = function (head) {
-  if (head === null || head.next === null) {
-    return head
-  }
+var sortList = function(head) {
+  let i=head,j=head
 
-  const newHead = head.next
-  head.next = swapPairs(newHead.next)
-  newHead.next = head
-  return newHead
-}
-
-
-//模拟方法
+  
+};

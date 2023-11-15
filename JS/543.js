@@ -11,16 +11,24 @@
  * @return {number}
  */
 var diameterOfBinaryTree = function (root) {
-    let left=tarverse(root.left);
-    let right=tarverse(root.right);
-
-    return left+right+1;
-};
-
-var tarverse=function(root){
-    if(!root)
-    {
-        return 0;
+    if (!root) {
+        return 0
     }
-    return Matn.max(tarverse(root.left)+1,tarverse(root.right+1));
+
+    let max = 0
+    const traverse = function (node) {
+        if (!node) return 0
+
+        const leftDep = traverse(node.left)
+        const rightDep = traverse(node.right)
+
+        max = Math.max(max, (leftDep + rightDep))
+        return Math.max(leftDep, rightDep) + 1
+    }
+
+
+    traverse(root)
+
+    return max
+
 }
