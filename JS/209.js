@@ -25,21 +25,23 @@ var minSubArrayLen1 = function (target, nums) {
   return ans == Infinity ? 0 : ans
 }
 
+
 var minSubArrayLen = function (target, nums) {
-  let n = nums.length
-  let preSum = new Map()
+  const n = nums.length
 
-  preSum.set(0, 1)
+  let l = r = sum = 0
+  let res = len + 1
 
-  let ans = 0, sum0_i = 0
+  while (r < len) {
+    sum += nums[r++]
 
-  for (let i = 0; i < n; i++) {
-    let sum0_j = sum0_i - k
-    if (preSum.get(sum0_j)) {
-      ans += preSum.get(sum0_j)
+    while (sum >= target) {
+      res = res < r - l ? res : r - l
+      sum-=nums[l++]
     }
-    preSum.set(sum0_i, (preSum.get(sum0_i) || 0) + 1)
   }
+
+  return res>len?0:res
 }
 
 
